@@ -1,8 +1,7 @@
-<img src="SCR W26.png" align="right" width="200" />
+<img src="SCR W26.png" align="right" width="150" />
 
 # Repository for Winter 2026 Spatial Capture Recapture Discussion Group
-
-## Austin Nash 
+Austin Nash 
 
 ## Purpose
 This is where discussion schedules, notes, and other materials will be shared. 
