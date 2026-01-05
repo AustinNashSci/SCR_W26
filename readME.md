@@ -5,3 +5,6 @@ Austin Nash
 
 ## Purpose
 This is where discussion schedules, notes, and other materials will be shared. 
+
+## Materials
+Royle, J. A., Chandler, R. B., Sollmann, R., & Gardner, B. (2013). Spatial capture-recapture. Academic press. (A digital copy is available at OSU Libraries)
