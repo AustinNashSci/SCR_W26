@@ -1,6 +1,8 @@
 ---
 title: "Austin Nash's Notes for Spatial Capture Recapture"
-format: html
+format:
+  html:
+    embed-resources: true
 theme: darkly
 ---
 
