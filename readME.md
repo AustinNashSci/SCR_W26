@@ -1,4 +1,4 @@
-<img src="SCR W26.png" align="right" width="180"/>
+<img src="resources/SCR W26.png" align="right" width="180"/>
 
 # Repository for Winter 2026 <br> Spatial Capture Recapture <br> Discussion Group
 
