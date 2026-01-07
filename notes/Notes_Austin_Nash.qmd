@@ -1,0 +1,7 @@
+---
+title: "Austin Nash's Notes for Spatial Capture Recapture"
+format: html
+theme: darkly
+---
+
+## Chapter 1
