@@ -10,3 +10,6 @@ theme: darkly
 SCR is an extension to capture recapture methods, but also allows for the integration of a wide array of data types and ecological theory.
 Common data streams used in SCR analyses include camera traps, DNA sampling, and acoustic recorders.
 While typical data streams revolve around static detectors, search encounter methods such as detection dog surveys can be used in an SCR framework.
+Encounter histories are commonly represented by a matrix with rows representing individuals and columns representing sampling events.
+Authors present a motivating example of using traditional CR methods to estimate the density of bears. 
+Going from N individuals to density requires strong assumptions, and density estimates vary widely based on the method selected. 
