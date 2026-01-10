@@ -7,3 +7,6 @@ theme: darkly
 ---
 
 ## Chapter 1
+SCR is an extension to capture recapture methods, but also allows for the integration of a wide array of data types and ecological theory.
+Common data streams used in SCR analyses include camera traps, DNA sampling, and acoustic recorders.
+While typical data streams revolve around static detectors, search encounter methods such as detection dog surveys can be used in an SCR framework.
