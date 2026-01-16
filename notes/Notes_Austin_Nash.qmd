@@ -57,6 +57,14 @@ Thus, SCR can be succintly described as:
 $$[n(y)|y][y|u][u|s][s]$$
 
 Lets break down each submodel
+
 $[s]$ is a point process of the activity centers
+
 $[u|s]$ is the location of an individual given their activity center, this sub model can be ignored if movement is not of particular interest or s is defined in a way not related to home range centers
-$[u|s]$ describes how capture histories arise conditional on the locaitons of individuals
+
+$[y|s]$ describes how capture histories arise conditional on the locations of individuals, when there is no movement model the submodel is instead $[y|s]$ . This model has a detection probability that varies with distance from $s$ as a function of two parameters $p0$ and $\sigma$, the detection probability at the activity center, and the decay of the probability over space.
+
+Simplest SCR Model
+$$ N \sim Poisson(\mu||S||) $$
+$$ s_i \sim Uniform(S) $$
+$$ y_ijk |s_i \sim Bernoulli(p(||x_j - s_i ||))$$ 
