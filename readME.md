@@ -20,7 +20,7 @@ We will cover a chapter a week, for example, Chapter 1 will be covered in week 1
 Spring 2026 will cover Parts II and III, which focus on advanced SCR modeling topics.
 
 ## Meeting Time
-TBD
+Tuesdays at 1:00pm in HOV 002B
 
 ## Other Resources
 

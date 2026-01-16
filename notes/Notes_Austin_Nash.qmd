@@ -27,3 +27,12 @@ Authors use the term home range and activity center interchangeably.
 SCR does not require the organism to be a central place forager, the activity center is essentially equivalent to a utilization distribution. 
 The possible values of all activity center points are referred to as the state space. 
 $$D = \frac {N}{A(S)} $$
+
+## Chapter 2
+Primarily review, covers the basics of statistical inference.
+Review of probability notation, random variables, common distributions
+
+Multinomial distribution - commonly used in CR studies to model the encounter histories of individuals. 
+Each category is each possible encounter history. 
+The multinomial is used in scr to model when an individual can only be caught in a single trap in an ocassion (like for box traps, unlike camera traps), N = 1 and the cell probabillities are the probability of being captured in each trap.
+The categorical distribution is the special case of the multinomial with N = 1. 
