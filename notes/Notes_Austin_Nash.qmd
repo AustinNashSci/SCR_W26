@@ -32,7 +32,31 @@ $$D = \frac {N}{A(S)} $$
 Primarily review, covers the basics of statistical inference.
 Review of probability notation, random variables, common distributions
 
+Binomial Distribution - used in SCR as an encounter model for the number of times i individual is captured at trap j after k occasions. Probability of encounter is governed by the distance between the activity center and the detector. Also used as a prior on population size. 
+
+Bernoulli Distribution - Binomial where n = 1, proper distribution to use when individuals have different detection probabilities (in the distance case have different detection kernels)
+
 Multinomial distribution - commonly used in CR studies to model the encounter histories of individuals. 
 Each category is each possible encounter history. 
 The multinomial is used in scr to model when an individual can only be caught in a single trap in an ocassion (like for box traps, unlike camera traps), N = 1 and the cell probabillities are the probability of being captured in each trap.
 The categorical distribution is the special case of the multinomial with N = 1. 
+
+Poisson - Used in SCR as a prior on population size N (Poisson point process of activity centers), model for frequency of captures in a trap (for when an individual can be detected multiple times at a trap in a single occassion).
+
+Uniform distribution - often used as a prior for detection probability or to set a uniform prior for the coordinates of points in space. 
+
+Bivariate Normal - used as a rudimentary description of movement outcomes about a home range center.
+
+SCR - any individual encounter model where spatial information is also obtained.
+SCR models have the random variables $s$, $u$, and $y$
+$s$ is the activity center
+$u$ is the location of the individual at time of sampling
+$y$ is the encounter data
+$n(y)$ refers to a summary of y, which is sometimes all that is observed
+Thus, SCR can be succintly described as:
+$$[n(y)|y][y|u][u|s][s]$$
+
+Lets break down each submodel
+$[s]$ is a point process of the activity centers
+$[u|s]$ is the location of an individual given their activity center, this sub model can be ignored if movement is not of particular interest or s is defined in a way not related to home range centers
+$[u|s]$ describes how capture histories arise conditional on the locaitons of individuals
