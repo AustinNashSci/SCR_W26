@@ -67,4 +67,4 @@ $[y|s]$ describes how capture histories arise conditional on the locations of in
 Simplest SCR Model
 $$ N \sim Poisson(\mu||S||) $$
 $$ s_i \sim Uniform(S) $$
-$$ y_ijk |s_i \sim Bernoulli(p(||x_j - s_i ||))$$ 
+$$ y_{ijk} |s_i \sim Bernoulli(p(||x_j - s_i ||))$$ 
