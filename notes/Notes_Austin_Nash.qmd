@@ -152,7 +152,16 @@ $$ Pr(T(y^{new})) > T(y) $$
 which should be close to 0.5
 
 Model Selection - three methods
-First appraoch - use the probability of direction of a variable to assess the strength of it for inclusion, can be problematic for some levels of inferential rigor, but is very useful and simple for tasks of lower causal strength such as prediction. 
+First appraoch - use the probability of direction of a variable to assess the strength of it for inclusion, can be problematic for some levels of inferential rigor, but is very useful and simple for tasks of lower causal strength such as prediction.
+
 Indicator variable approach :
 $$ \mathbb{E}(y_i) = \beta_0 + w_1\beta_1x_i $$
 $$ w_1 \sim Bernoulli(0.50) $$
+
+The posterior density of $w_1$ = 1 or = 0 gives the relative support for inclusion in the model. 
+If there are diffuse priors for the structural variables of the model, the chain may very infrequently jump from $w_1$ = 1 to = 0 infrequently, leading to poor mxing. 
+A solution is to fit the full model without weight variables, then use those posteriors as priors for the structural variables in a model selection run. 
+The third approach is to use subject-matter expertise and context to select models that are biologically and structurally plausible. 
+
+## Chapter 4
+Closed Population Models

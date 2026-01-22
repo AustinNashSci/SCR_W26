@@ -2402,8 +2402,13 @@ window.Quarto = {
 <p><span class="math display">\[ T(\textbf{y}^{new}, \theta) = \sum_i D(y_i^{new}, \theta)^2 \]</span></p>
 <p>Then, the bayesian p-value is <span class="math display">\[ Pr(T(y^{new})) &gt; T(y) \]</span></p>
 <p>which should be close to 0.5</p>
-<p>Model Selection - three methods</p>
+<p>Model Selection - three methods First appraoch - use the probability of direction of a variable to assess the strength of it for inclusion, can be problematic for some levels of inferential rigor, but is very useful and simple for tasks of lower causal strength such as prediction.</p>
 <p>Indicator variable approach : <span class="math display">\[ \mathbb{E}(y_i) = \beta_0 + w_1\beta_1x_i \]</span> <span class="math display">\[ w_1 \sim Bernoulli(0.50) \]</span></p>
+<p>The posterior density of <span class="math inline">\(w_1\)</span> = 1 or = 0 gives the relative support for inclusion in the model. If there are diffuse priors for the structural variables of the model, the chain may very infrequently jump from <span class="math inline">\(w_1\)</span> = 1 to = 0 infrequently, leading to poor mxing. A solution is to fit the full model without weight variables, then use those posteriors as priors for the structural variables in a model selection run. The third approach is to use subject-matter expertise and context to select models that are biologically and structurally plausible.</p>
+</section>
+<section id="chapter-4" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-4">Chapter 4</h2>
+<p>Closed Population Models</p>
 </section>
 
 </main>
