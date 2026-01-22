@@ -2392,7 +2392,18 @@ window.Quarto = {
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Binomial GLMs</p>
-<p>When you have bounded counts or a single trial with success probability p (Bernoulli case)</p>
+<p>When you have bounded counts or a single trial with success probability p (Bernoulli case). N-mixture models are a special case where the number of trials itself is a latent parameter. In capture recapture modeling the number of individuals captured out of the total population size is a binomial estimation problem. Logit and cloglog are typical link functions, cloglog is useful when the response should scale with area or effort.</p>
+<p>Complementary Log Log link <span class="math display">\[ cloglog(p_i) = log(-log(l-p_i)) = log(\lambda_i) \]</span></p>
+<p>This naturally connects detection probability with local abundance, which is a logical connection.</p>
+<p>Bayesian Model Checking - bayesian p value is authors choice, “create a discrepancy measure of the observed and predicted data, then compare the distribution of that measure to the piosterior predictive distribution of that statistics for hypothetical perfect datasets where the model is correct.”</p>
+<p>Pearson residuals descrepancy statistic for count frequency data <span class="math display">\[ D(y_i, \theta) = \frac{y_i -\mathbb{E}(y_i)}{\sqrt{Var(y_i)}} \]</span></p>
+<p>Fit Statistic is generated from the squared residuals computed from the observations <span class="math display">\[ T(\textbf{y}, \theta) = \sum_i D(y_i, \theta)^2 \]</span></p>
+<p>This fit statistic is computed at every iteration of a MCMC algorithm, given current parameter values. At each iteration, you also simulate a new dataset given the current parameters of the MCMC, then generate the same fit statistic</p>
+<p><span class="math display">\[ T(\textbf{y}^{new}, \theta) = \sum_i D(y_i^{new}, \theta)^2 \]</span></p>
+<p>Then, the bayesian p-value is <span class="math display">\[ Pr(T(y^{new})) &gt; T(y) \]</span></p>
+<p>which should be close to 0.5</p>
+<p>Model Selection - three methods</p>
+<p>Indicator variable approach : <span class="math display">\[ \mathbb{E}(y_i) = \beta_0 + w_1\beta_1x_i \]</span> <span class="math display">\[ w_1 \sim Bernoulli(0.50) \]</span></p>
 </section>
 
 </main>

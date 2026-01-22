@@ -124,4 +124,35 @@ model{
 
 Binomial GLMs 
 
-When you have bounded counts or a single trial with success probability p (Bernoulli case)
+When you have bounded counts or a single trial with success probability p (Bernoulli case).
+N-mixture models are a special case where the number of trials itself is a latent parameter. 
+In capture recapture modeling the number of individuals captured out of the total population size is a binomial estimation problem.
+Logit and cloglog are typical link functions, cloglog is useful when the response should scale with area or effort. 
+
+Complementary Log Log link
+$$ cloglog(p_i) = log(-log(l-p_i)) = log(\lambda_i) $$
+
+This naturally connects detection probability with local abundance, which is a logical connection. 
+
+Bayesian Model Checking - bayesian p value is authors choice, "create a discrepancy measure of the observed and predicted data, then compare the distribution of that measure to the piosterior predictive distribution of that statistics for hypothetical perfect datasets where the model is correct."
+
+Pearson residuals descrepancy statistic for count frequency data
+$$ D(y_i, \theta) = \frac{y_i -\mathbb{E}(y_i)}{\sqrt{Var(y_i)}} $$
+
+Fit Statistic is generated from the squared residuals computed from the observations
+$$ T(\textbf{y}, \theta) = \sum_i D(y_i, \theta)^2 $$
+
+This fit statistic is computed at every iteration of a MCMC algorithm, given current parameter values. At each iteration, you also simulate a new dataset given the current parameters of the MCMC, then generate the same fit statistic
+
+$$ T(\textbf{y}^{new}, \theta) = \sum_i D(y_i^{new}, \theta)^2 $$
+
+Then, the bayesian p-value is 
+$$ Pr(T(y^{new})) > T(y) $$
+
+which should be close to 0.5
+
+Model Selection - three methods
+First appraoch - use the probability of direction of a variable to assess the strength of it for inclusion, can be problematic for some levels of inferential rigor, but is very useful and simple for tasks of lower causal strength such as prediction. 
+Indicator variable approach :
+$$ \mathbb{E}(y_i) = \beta_0 + w_1\beta_1x_i $$
+$$ w_1 \sim Bernoulli(0.50) $$
