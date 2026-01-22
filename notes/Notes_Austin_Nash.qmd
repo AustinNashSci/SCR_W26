@@ -121,3 +121,7 @@ model{
   sigma ~ dunif(0,10)
 }
 ```
+
+Binomial GLMs 
+
+When you have bounded counts or a single trial with success probability p (Bernoulli case)
