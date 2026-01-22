@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
 width: 0.8em;
 margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
 }
+
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+}
+pre.numberSource { margin-left: 3em; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -2319,6 +2354,43 @@ window.Quarto = {
 <p><span class="math inline">\([u|s]\)</span> is the location of an individual given their activity center, this sub model can be ignored if movement is not of particular interest or s is defined in a way not related to home range centers</p>
 <p><span class="math inline">\([y|s]\)</span> describes how capture histories arise conditional on the locations of individuals, when there is no movement model the submodel is instead <span class="math inline">\([y|s]\)</span> . This model has a detection probability that varies with distance from <span class="math inline">\(s\)</span> as a function of two parameters <span class="math inline">\(p0\)</span> and <span class="math inline">\(\sigma\)</span>, the detection probability at the activity center, and the decay of the probability over space.</p>
 <p>Simplest SCR Model <span class="math display">\[ N \sim Poisson(\mu||S||) \]</span> <span class="math display">\[ s_i \sim Uniform(S) \]</span> <span class="math display">\[ y_{ijk} |s_i \sim Bernoulli(p(||x_j - s_i ||))\]</span></p>
+</section>
+<section id="chapter-3" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-3">Chapter 3</h2>
+<p>Covers GLMMs in a Bayesian framework, primarily in the BUGS language. This material has also been covered in AHM and FW599. GLMMS - linear model with a link function and a distribution from the exponential family.</p>
+<p>Bayes Rule: <span class="math display">\[ [\theta|y] = \frac{[y|\theta][\theta] }{[y]} \]</span></p>
+<p>When settng the prior <span class="math inline">\(N\)</span> for the number of individuals in the population <span class="math display">\[ Binomial(M, \psi) \]</span> the prior <span class="math inline">\(N\)</span> needs to be sufficiently large to not bound the estimation of <span class="math inline">\(M\)</span></p>
+<p>REMEMBER: priors are not invariant to link function transformations! Bayesian inference is valid for all sample sizes, not only asymptotically valid at large enough sample sizes like frequentist techniques.</p>
+<p>Review of gibbs sampling, Metropolis-Hastings, BUGS Language syntax, convergence diagnositics, burn in, effective sample size, CrI.</p>
+<p>Monte-Carlo error should be small relative to the magnitude of the parameter estimate.</p>
+<p>Poisson GLMS: Basic Poisson GLM, the canonical model for counts in ecology, with a fixed mean-variance relationship that is often problematic.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>model{</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nObs){</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    y[i] <span class="sc">~</span><span class="fu">dpois</span>(lambda[i])</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">log</span>(lambda[i]) <span class="ot">&lt;-</span> beta0 <span class="sc">+</span> beta1<span class="sc">*</span>variable1[i]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  beta0 <span class="sc">~</span> <span class="fu">dunif</span>(<span class="sc">-</span><span class="dv">5</span>,<span class="dv">5</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  beta1 <span class="sc">~</span> <span class="fu">dunif</span>(<span class="sc">-</span><span class="dv">5</span>,<span class="dv">5</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Poisson GLMM with OLRE (Log-Normal Mixture) Used to deal with extra poisson variation (overdispersion)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>model{</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Likelihood</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nObs){</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    y[i] <span class="sc">~</span><span class="fu">dpois</span>(lambda[i])</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">log</span>(lambda[i]) <span class="ot">&lt;-</span> beta0 <span class="sc">+</span> beta1<span class="sc">*</span>variable1[i] <span class="sc">+</span> eta[i]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    eta[i] <span class="sc">~</span><span class="fu">dnorm</span>(<span class="dv">0</span>, tau)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Priors</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  beta0 <span class="sc">~</span> <span class="fu">dunif</span>(<span class="sc">-</span><span class="dv">5</span>,<span class="dv">5</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  beta1 <span class="sc">~</span> <span class="fu">dunif</span>(<span class="sc">-</span><span class="dv">5</span>,<span class="dv">5</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  tau <span class="sc">~</span> <span class="dv">1</span><span class="sc">/</span>(sigma<span class="sc">*</span>sigma)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  sigma <span class="sc">~</span> <span class="fu">dunif</span>(<span class="dv">0</span>,<span class="dv">10</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 
 </main>

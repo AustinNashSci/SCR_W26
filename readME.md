@@ -25,3 +25,4 @@ Tuesdays at 1:00pm in HOV 002B
 ## Other Resources
 
 oSCR Lecture Series https://www.youtube.com/@oscrpackage206
+

@@ -68,3 +68,56 @@ Simplest SCR Model
 $$ N \sim Poisson(\mu||S||) $$
 $$ s_i \sim Uniform(S) $$
 $$ y_{ijk} |s_i \sim Bernoulli(p(||x_j - s_i ||))$$ 
+
+## Chapter 3
+Covers GLMMs in a Bayesian framework, primarily in the BUGS language.
+This material has also been covered in AHM and FW599. 
+GLMMS - linear model with a link function and a distribution from the exponential family. 
+
+Bayes Rule:
+$$ [\theta|y] = \frac{[y|\theta][\theta] }{[y]} $$
+
+When settng the prior $N$ for the number of individuals in the population
+$$ Binomial(M, \psi) $$
+the prior $N$ needs to be sufficiently large to not bound the estimation of $M$
+
+REMEMBER: priors are not invariant to link function transformations!
+Bayesian inference is valid for all sample sizes, not only asymptotically valid at large enough sample sizes like frequentist techniques.
+
+Review of gibbs sampling, Metropolis-Hastings, BUGS Language syntax, convergence diagnositics, burn in, effective sample size, CrI.
+
+Monte-Carlo error should be small relative to the magnitude of the parameter estimate. 
+
+Poisson GLMS: Basic Poisson GLM, the canonical model for counts in ecology, with a fixed mean-variance relationship that is often problematic.
+
+```{r, eval = F}
+
+model{
+  for(i in 1:nObs){
+    y[i] ~dpois(lambda[i])
+    log(lambda[i]) <- beta0 + beta1*variable1[i]
+  }
+  beta0 ~ dunif(-5,5)
+  beta1 ~ dunif(-5,5)
+}
+
+```
+
+Poisson GLMM with OLRE (Log-Normal Mixture)
+Used to deal with extra poisson variation (overdispersion)
+```{r, eval = F}
+model{
+  #Likelihood
+  for(i in 1:nObs){
+    y[i] ~dpois(lambda[i])
+    log(lambda[i]) <- beta0 + beta1*variable1[i] + eta[i]
+    eta[i] ~dnorm(0, tau)
+  }
+
+  #Priors
+  beta0 ~ dunif(-5,5)
+  beta1 ~ dunif(-5,5)
+  tau ~ 1/(sigma*sigma)
+  sigma ~ dunif(0,10)
+}
+```
