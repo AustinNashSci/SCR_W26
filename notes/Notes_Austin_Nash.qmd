@@ -165,3 +165,7 @@ The third approach is to use subject-matter expertise and context to select mode
 
 ## Chapter 4
 Closed Population Models
+
+## Extension An integrated path for spatial capture–recapture and animal movement modeling
+McClintock et al. 2021 Ecology  https://doi.org/10.1002/ecy.3473
+
