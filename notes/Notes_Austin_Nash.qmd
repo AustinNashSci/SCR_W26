@@ -169,3 +169,51 @@ Closed Population Models
 ## Extension An integrated path for spatial capture–recapture and animal movement modeling
 McClintock et al. 2021 Ecology  https://doi.org/10.1002/ecy.3473
 
+This article introduces and special issue on movement modeling and SCR.
+Typically, SCR focuses on population level processes, while movement modeling focuses on individual level processes.
+
+Terminology: Langragian - individual, Eulerian - population, level processes
+
+Integrating realistic movement processes can reduce bias in population parameter estimation from SCR. 
+The key methodological approach is incorporating a mvoement model into SCR so that observations are conditioned on the dynamic location of an individual as opposed to a static and latent activity center.
+
+Basics of SCR <br>
+State Space $M$ is the area in 2 dimensional space where an individual resides during the study.
+Sampling occurs by individually identifying individuals detected at an array of $J$ detectors over $T$ time intervals, although other sampling designs are possible such as search encounter and continuous time.
+The spatial encounter history of each individual is the key data stream collected.
+$$ [y|s,N,\theta] = [y|s,\theta] [s, N|\theta] $$
+
+The first term is the $y$ encounters, conditional on $s$, activity centers, $N$ the number of individuals in the state space, $\theta$ and fitted parameters. 
+The second term in the SCR model itself where the locations of individuals $y$ is conditional on their activity centers $s$ and how quickly detection decays $\theta$. 
+The activity centers are described by the point process model, where the activity centers for N individuals, $s,N$, are conditional on the point process parameters $\theta$.
+The detection of an individual is a function of the difference in location between the detector and the latent activity center:
+
+$$ p_{ij} = p_0 exp(-\frac{\parallel x_j - s_i \parallel^2}{2 \sigma^2_{det}}) $$
+
+Here $p0$ is the baseline detection probability and $\sigma$ controls the decay rate, which is symmetric and gaussian. 
+The $\parallel^2%$ here refers to a bivariate normal distribution, not the distance squared.
+
+Under the point process model, a homogenous poisson point process assumes that activity centers are uniformly distributed across space, while using an inhomogenous point process allows for the intensity (number of indviduals) to vary with some underlying covariate like habitat condition. 
+Figure 2 provides an excellent overview of the process and data model of SCR and a movement integrated SCR. 
+
+Extensions include allowing for open populations (Schaub and Royle 2014), resource selection, landscape connectivity, territoriality, attraction, ipms, passive acoustics, and unmarked individuals. For these extensions, they are implemented as either inhomogenous point process models, or as covariates on $\sigma$ and $p0$. Another rudimentary extension to include movement is to allow activity centers that change based on a simple random walk between primary periods. 
+
+Movement Modeling<br>
+Common movement modeling techniques include RSFs and SSFs, and those can be extended to spatiotemporal point process models to distinguish resourece selection from availability while accounting for the underlying process of movement (such as different movement speeds in different habitats).
+Lagrangian (individual) movement models are parameterized random walk models in discrete or continuous time. 
+Simple discrete time movement model
+$$\mu_t = \mu_{t-1} + \epsilon_t $$
+where $\epsilon$ is a symmetric normal dispersion kernel.
+This generates a time series of points that walks around, see Fig 3
+
+Additional extensions to the random walk can be easily incorporated, such as bias to a central place:
+$$ \mu_t = \mu_{t-1} + \boldsymbol B(a-\mu_{t-1}) + \epsilon_t $$
+where $\boldsymbol B $ is a matrix that governs the degree of attraction to point a.
+
+Adding correlation in direction between the steps creates longer, more realistic move similar to a non central place forager searching through a landscape. 
+More complex and modern movement models include multiple states, each with their own set of movement parameters, which can be easily done with a piecewise equation for $n$ states.
+Movement parameters can be a function of covariates such as age and sex. 
+
+
+
+
