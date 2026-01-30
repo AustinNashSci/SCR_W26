@@ -208,12 +208,41 @@ This generates a time series of points that walks around, see Fig 3
 
 Additional extensions to the random walk can be easily incorporated, such as bias to a central place:
 $$ \mu_t = \mu_{t-1} + \boldsymbol B(a-\mu_{t-1}) + \epsilon_t $$
-where $\boldsymbol B $ is a matrix that governs the degree of attraction to point a.
+where $\boldsymbol B$ is a matrix that governs the degree of attraction to point a.
 
 Adding correlation in direction between the steps creates longer, more realistic move similar to a non central place forager searching through a landscape. 
 More complex and modern movement models include multiple states, each with their own set of movement parameters, which can be easily done with a piecewise equation for $n$ states.
 Movement parameters can be a function of covariates such as age and sex. 
 
+Potential functions allow for the modeling of movement along environmental gradients, the gradient is a vector field of partial derivatives that convey the direction and magnitude of attraction. 
 
+Limiting Distributions<br>
+When going from Lagrangian vs Eulerian, the limiting distribution of the time series process is a useful concept, which is the limit of $$ \mu_{t+h} | \mu_t $$ as h -> $\infty$
 
+Conceptually, this is creating greater and greater time gaps between locations, so that they are independent. This limiting distribution of $N$ individuals in $M$ state space is an animal density surface, and is thus conceptually united to SCR model parameters. 
 
+Few movement models have closed form limiting distributions, or limiting distributions at all, but the biased random walk does, see Eqn 11. 
+
+The SCR observation model can be a non-uniform thinning of the limiting distribution of the movement of all individuals in $M$, this is most realistic when an animal can move throughout its entire home range within an occasion. 
+The Langevin diffusion RSF model also has a closed form limiting distribution. 
+
+Movement data has GPS error, and is thus often modeled hierarchically with a movement and measurement sub model. 
+
+The scale parameter assumptions have led SCR to be most widely used with species with symmetric and resident home ranges, as opposed to nomadic species. 
+Uncertainty can be underestimated, even though abundance is not biased when the modeled species has a non-circular home range. 
+Considerable bias can occur with sigma (think dune example from Taal) as observations that are very far away assume a large circle of higher detection probability. 
+Resource selection can bias density becuase detection is not just a single function of distance. 
+Movement also becomes extremely important in open population model parameter estimation. 
+Animal movement models are not typically attached to demographic rates or population estimates. 
+
+Integrating SCR and Movement Data<br>
+Basic integrated SCR model can be described as
+$$[y|\mu, N, \theta] = [y|\mu, \theta ] [\mu | \theta] [\mu_1, N, |\theta] $$
+Term 1 is SCR. 
+Term 2 is the movement model.
+Term 3 is the point process model.
+$\mu$ the position process, is now a latent variable, as we do not know the exact position of the animal in each time step. 
+Thus, we estimate a latent movement trajectory as opposed to a static activity center.
+Therefore, the distance for the detection kernel becomes the distance between the detector and the latent location at time $t$ as opposed to the activity center $s$. 
+The point process now represents the initial positon of N individuals as opposed to N activity centers.
+By adding a center of attraction, one can estimate second and third order resource selection (selection of a home range within $M$ and selection of resources within a home range).
