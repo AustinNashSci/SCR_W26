@@ -261,4 +261,4 @@ Models can be broken down into 4 quadrants, space and time bring either discrete
 
 Movement near the boundaries of the state space can be a challenge, as simple random walk difffusive movement would lead to a deterministic reduction in density over time that is unrealistic.
 A simple solution is expanding the state space far beyond the boundaries of the movement of individuals, which can lead to longer model fitting processes due to the need to estimate more parameters. 
-Additionally, now that each movement trajectory is latent as opposed to just the home range center, there are $NT$ latent parameters to estimate as opposed to simply $N$. 
+Additionally, now that each movement trajectory is latent as opposed to just the home range center, there are $NT$ latent parameters to estimate as opposed to simply $N$. Kni
