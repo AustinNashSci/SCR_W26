@@ -246,3 +246,19 @@ Thus, we estimate a latent movement trajectory as opposed to a static activity c
 Therefore, the distance for the detection kernel becomes the distance between the detector and the latent location at time $t$ as opposed to the activity center $s$. 
 The point process now represents the initial positon of N individuals as opposed to N activity centers.
 By adding a center of attraction, one can estimate second and third order resource selection (selection of a home range within $M$ and selection of resources within a home range).
+
+One issue with uniting movement data and SCR data is a discrete time versus continuous time mismatch.
+One solution is to model the distance between the expected location of the individual within the time step and the observed location, this seems conceptually similar to a dynamic activity center (it is currently unclear to me how it is not the same thing).
+
+Next Steps <br>
+One challenge with movement-scr integrated models is optimal sampling is unknown. 
+In SCR, the sampling trade of is between the number of individuals captured and the extent of spatial recaptures, which is often dictated by trap spacing and is typically suggested to be $1-2\sigma$. 
+Without auxiliary location data, the number of spatial recaptures required is likely to be higher in order to more appropriately model the movement process.
+
+Another challenge is that sampling bias is controlled in SCR through the detection process, but sampling bias is typically not corrected for in movement studies, with telemetered individuals not representing a random sample of the population, and thus potentially biasing the parameters of the movement model from the true population mean.
+
+Models can be broken down into 4 quadrants, space and time bring either discrete or continous. 
+
+Movement near the boundaries of the state space can be a challenge, as simple random walk difffusive movement would lead to a deterministic reduction in density over time that is unrealistic.
+A simple solution is expanding the state space far beyond the boundaries of the movement of individuals, which can lead to longer model fitting processes due to the need to estimate more parameters. 
+Additionally, now that each movement trajectory is latent as opposed to just the home range center, there are $NT$ latent parameters to estimate as opposed to simply $N$. 
