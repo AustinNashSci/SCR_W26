@@ -171,7 +171,12 @@ Needs to Be Updated - ALN Read this chapter on a mobile device on a plane and wa
 ## Chapter 5
 Spatial Capture Recapture Models
 
+The prior chapter introduced a primitive scr model, where the distance from home range center to trapping array boundary was an individual covariate. 
+For full SCR, the location of the animal and each individual detector is included.
+Instead of distance to array edge, we define the distance to each individual trap.
+Input Data is JxKxN array of j traps, across K occassions, for each N indiviudal.
 
+Model SCR0 - most applicable to passive devices like hare snares, assumes: devices don't fill up, individual can be captured by more than one trap in an occasion, and individuals are detected at most 1 time per detector per occasion.
 
 ## Extension An integrated path for spatial capture–recapture and animal movement modeling
 McClintock et al. 2021 Ecology  https://doi.org/10.1002/ecy.3473
