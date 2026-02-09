@@ -164,7 +164,14 @@ A solution is to fit the full model without weight variables, then use those pos
 The third approach is to use subject-matter expertise and context to select models that are biologically and structurally plausible. 
 
 ## Chapter 4
-Closed Population Models
+Closed Capture-Recapture Population Models
+
+Needs to Be Updated - ALN Read this chapter on a mobile device on a plane and was unable to take notes
+
+## Chapter 5
+Spatial Capture Recapture Models
+
+
 
 ## Extension An integrated path for spatial capture–recapture and animal movement modeling
 McClintock et al. 2021 Ecology  https://doi.org/10.1002/ecy.3473
