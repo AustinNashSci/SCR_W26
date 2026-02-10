@@ -203,9 +203,52 @@ Creating irregular state spaces can be difficult in bugs, but is easier in secr.
 The detection process is a rudimentary model of animal movement, and detection can be broken down into detection given the animal is using the area conditional on the probability of usage.
 Thus, if using a negative exponential detection function, the detection function is identical to a RSF. 
 Therefore, if we parameterize detection with habitat covariates, we are integrating an RSF into our SCR model, although I am curious if the way the show integrating an RSF will be more formal than this.
+Telemetry can be integrated into a SCR model here with the detection function.
 Under the bivariate normal detection model we can compute home range area directly, by using sigma.
 This is particularly useful in reverse when conducting simulation studies, because you can calculate what sigma should be to result in a given home range area that can be motivated by prior knowledge.
+Chapter 12 covers least cost path models of distance, which will likely be useful for voles as they are traveling along trails.
+The authors provide useful code for simulating SCR data and the simSCR0 function in the scrbook package can be used.
 
+Basic SCR0 model code:
+
+```{r, eval = F}
+cat("
+model{
+
+  #Priors
+  alpha0 ~ dnorm(0,.1) # alpha prior
+  logit(p0) <- alpha0 #baseline detection probability prior
+  alpha1 ~ dnorm(0,.1) #distance decay prior
+  sigma <- sqrt(1/(2*alpha1)) # sigma conversion
+  psi ~ dunif(0,1) # Data Augmentation proportion prior
+
+  #Likelihood
+  for(i in 1:M){
+
+    z[i] ~ dbern(psi) #Data augmentation parameter
+
+    s[i,1] ~ dunif(xlim[1],xlim[2]) # Home range X coord
+    s[i,2] ~ dunif(ylim[1],ylim[2]) # Home range y coord
+
+      for(j in 1:J){
+
+        d[i,j] <- pow(pow(s[i,1]-X[j,1],2) + pow(s[i,2]-X[j,2],2),0.5) #distance of this encounter
+        p[i,j] <- z[i]*p0*exp(- alpha1*d[i,j]*d[i,j]) #probability of detection
+        y[i,j] ~ dbin(p[i,j],K) # observed detection history
+        
+      }
+  }
+
+  # Derived Parameters
+  N <- sum(z[]) # number of indviduals
+  D <- N/64 # Density
+}
+",file = "SCR0b.txt")
+```
+
+The implied home range area can vary a decent bit based on what detection function we choose, but N and density are less sensitive to this choice.
+
+5.8, Austin add E(N) points
  
 
 
