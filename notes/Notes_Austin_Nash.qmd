@@ -189,8 +189,27 @@ Figure 5.1 effectively shows the differences between gaussian, gaussian hazard, 
 In SCR, home range is just defined as the area used by an organism during an arbitrary time period, and the center is just the centroid, which could be asymptotically observed with many VHF fixes.
 The distance of each observation from the individual's home range center is unobserved, and thus requires a prior distribution, the uniform assumption of home range centers in space leads to a uniform prior on s.
 $s$ is a binomial point process, since the number of total points is fixed unlike a poisson point process.
-The total number of points, $N$ is fixed because we add fake individuals in our data augmentation procedure and thus know the upper bound of possible individuals.
+The total number of points, $N$ is fixed because we add $M$ fake individuals in our data augmentation procedure and thus know the upper bound of possible individuals.
 Realizations of this point process will result in patterns that are not uniform, but do exhibit some spatial clustering, because even though the priors are uniform, we are informing them with data which leads to a non-uniform posterior.
+
+Note that the state space in SCR is often called an observation window in the point process literature. $S$ is the state space of $s_i$. 
+$$ s_i \sim Uniform(S) $$
+ 
+Choosing $S$ can seem arbitrary, but if it is large enough to include all individuals, then density is invariant to $S$, as it scales with $N$ given constant density. 
+Increasing $S$ increases computational complexity because $M$ total individuals including augmented individuals must increase. 
+You can also think in terms of distance sampling, where if detection decreases with distance, you could create an arbitrary number of sampling distance boxes way far out and they would contribute nothing as the expected number of detected individuals will essentially be 0.
+Creating irregular state spaces can be difficult in bugs, but is easier in secr. 
+
+The detection process is a rudimentary model of animal movement, and detection can be broken down into detection given the animal is using the area conditional on the probability of usage.
+Thus, if using a negative exponential detection function, the detection function is identical to a RSF. 
+Therefore, if we parameterize detection with habitat covariates, we are integrating an RSF into our SCR model, although I am curious if the way the show integrating an RSF will be more formal than this.
+Under the bivariate normal detection model we can compute home range area directly, by using sigma.
+This is particularly useful in reverse when conducting simulation studies, because you can calculate what sigma should be to result in a given home range area that can be motivated by prior knowledge.
+
+ 
+
+
+
 
 
 
