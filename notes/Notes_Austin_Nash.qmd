@@ -248,7 +248,20 @@ model{
 
 The implied home range area can vary a decent bit based on what detection function we choose, but N and density are less sensitive to this choice.
 
-5.8, Austin add E(N) points
+Estimating N or density can be broken into three objectives, the value for N for the population that was sampled, also known as realized N, N for a similar but unsampled population, and the expected value of N.
+
+SCR0 Model Assumptions: demographic and geographic closure, activity centers are randomly distributed, detection is a function of distance, encounters among and of the same indivdiual are independent.
+
+Wolverine worked example: camera trapping study in SE Alaska
+Data consist of an ecnounter data file and trap deployment file, which manage which individuals were seen at which traps and which traps were operating for what days and at what locations.
+This data structure will be relatively standard across SCR studies.
+
+When defining a state space, it is useful to standardize the coordinates and have it defined near the origin so the chains mix well.
+In the wolverine example, the state space is defined as a continuous space within a rectangle, but do deal with masking it is easier to discretize the space into points and mask out points that are unable to contain individuals, such as the ocean for wolverines.
+In the SCR0 model above, the state space is defined by the uniform priors on the x and y coordinates of each activity center.
+In this wolverine examople, and in other cases, if an individudal is moving from detector to detector to harvest bait, it can artificially alter the movement behavior of the individual and thus the resulting home range size estimate.
+
+
  
 
 
