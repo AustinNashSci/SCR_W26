@@ -258,9 +258,12 @@ This data structure will be relatively standard across SCR studies.
 
 When defining a state space, it is useful to standardize the coordinates and have it defined near the origin so the chains mix well.
 In the wolverine example, the state space is defined as a continuous space within a rectangle, but do deal with masking it is easier to discretize the space into points and mask out points that are unable to contain individuals, such as the ocean for wolverines.
+Note, when discretizing space be cautious, a home range center in the middle of a parking lot could be a good estimate if there is great habitat around the parking lot, and a small mammal travels around the perimeter of that lot to forage.
 In the SCR0 model above, the state space is defined by the uniform priors on the x and y coordinates of each activity center.
 In this wolverine examople, and in other cases, if an individudal is moving from detector to detector to harvest bait, it can artificially alter the movement behavior of the individual and thus the resulting home range size estimate.
-
+When generating a discretized state space, there is a trade off in the resolution of the grid of points and the computational intensity.
+Density maps, home range locations, etc. are all derived parameters and can be calculated relatively easily from an SCR model.
+Note, when creating a map of density, it will tend toward the mean density as you get far away from detectors, as the influence of the data weakens.
 
  
 
