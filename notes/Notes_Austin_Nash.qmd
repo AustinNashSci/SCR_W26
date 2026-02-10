@@ -179,7 +179,7 @@ Input Data is JxKxN array of j traps, across K occassions, for each N indiviudal
 Model SCR0 - most applicable to passive devices like hare snares, assumes: devices don't fill up, individual can be captured by more than one trap in an occasion, and individuals are detected at most 1 time per detector per occasion.
 
 The simplest version, with no covariates, collapses occasions into a count of detections out of K sampling sessions, and thus detection histories of individuals at each trap are
-$$ y_{ij} ~ Binomial(K, p_{ij}) $$
+$$ y_{ij} \sim Binomial(K, p_{ij}) $$
 Note here that we are indexing by $i$ individual and $j$ trap, as opposed to a cr model that would just index by individual.
 
 $p_{ij}$ varies based on the distance between the trap and the home range center of that indvidual.
@@ -195,7 +195,7 @@ Realizations of this point process will result in patterns that are not uniform,
 
 
 
-## Extension An integrated path for spatial capture–recapture and animal movement modeling
+## Extension: An integrated path for spatial capture–recapture and animal movement modeling
 McClintock et al. 2021 Ecology  https://doi.org/10.1002/ecy.3473
 
 This article introduces and special issue on movement modeling and SCR.
