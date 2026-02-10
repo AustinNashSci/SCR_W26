@@ -2408,7 +2408,15 @@ window.Quarto = {
 </section>
 <section id="chapter-4" class="level2">
 <h2 class="anchored" data-anchor-id="chapter-4">Chapter 4</h2>
-<p>Closed Population Models</p>
+<p>Closed Capture-Recapture Population Models</p>
+<p>Needs to Be Updated - ALN Read this chapter on a mobile device on a plane and was unable to take notes</p>
+</section>
+<section id="chapter-5" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-5">Chapter 5</h2>
+<p>Spatial Capture Recapture Models</p>
+<p>The prior chapter introduced a primitive scr model, where the distance from home range center to trapping array boundary was an individual covariate. For full SCR, the location of the animal and each individual detector is included. Instead of distance to array edge, we define the distance to each individual trap. Input Data is JxKxN array of j traps, across K occassions, for each N indiviudal.</p>
+<p>Model SCR0 - most applicable to passive devices like hare snares, assumes: devices don’t fill up, individual can be captured by more than one trap in an occasion, and individuals are detected at most 1 time per detector per occasion.</p>
+<p>The simplest version, with no covariates, collapses occasions into a count of detections out of K sampling sessions, and thus detection histories of individuals at each trap are <span class="math display">\[ y_{ij} ~ Binomial(K, p_{ij}) \]</span></p>
 </section>
 <section id="extension-an-integrated-path-for-spatial-capturerecapture-and-animal-movement-modeling" class="level2">
 <h2 class="anchored" data-anchor-id="extension-an-integrated-path-for-spatial-capturerecapture-and-animal-movement-modeling">Extension An integrated path for spatial capture–recapture and animal movement modeling</h2>
@@ -2437,7 +2445,7 @@ window.Quarto = {
 <p>Next Steps <br> One challenge with movement-scr integrated models is optimal sampling is unknown. In SCR, the sampling trade of is between the number of individuals captured and the extent of spatial recaptures, which is often dictated by trap spacing and is typically suggested to be <span class="math inline">\(1-2\sigma\)</span>. Without auxiliary location data, the number of spatial recaptures required is likely to be higher in order to more appropriately model the movement process.</p>
 <p>Another challenge is that sampling bias is controlled in SCR through the detection process, but sampling bias is typically not corrected for in movement studies, with telemetered individuals not representing a random sample of the population, and thus potentially biasing the parameters of the movement model from the true population mean.</p>
 <p>Models can be broken down into 4 quadrants, space and time bring either discrete or continous.</p>
-<p>Movement near the boundaries of the state space can be a challenge, as simple random walk difffusive movement would lead to a deterministic reduction in density over time that is unrealistic. A simple solution is expanding the state space far beyond the boundaries of the movement of individuals, which can lead to longer model fitting processes due to the need to estimate more parameters. Additionally, now that each movement trajectory is latent as opposed to just the home range center, there are <span class="math inline">\(NT\)</span> latent parameters to estimate as opposed to simply <span class="math inline">\(N\)</span>.</p>
+<p>Movement near the boundaries of the state space can be a challenge, as simple random walk difffusive movement would lead to a deterministic reduction in density over time that is unrealistic. A simple solution is expanding the state space far beyond the boundaries of the movement of individuals, which can lead to longer model fitting processes due to the need to estimate more parameters. Additionally, now that each movement trajectory is latent as opposed to just the home range center, there are <span class="math inline">\(NT\)</span> latent parameters to estimate as opposed to simply <span class="math inline">\(N\)</span>. Kni</p>
 </section>
 
 </main>
