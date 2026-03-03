@@ -304,7 +304,18 @@ SCR encounter probability models include a baseline encounter rate $\lambda_0$ a
 Covers three types of covariates in an encounter model, fully, partially, or unobserved covariates.
 As previously discussed, there are many encounter functions, and estimates tend to be robust across them.
 However, the relationship between $\sigma$ and home range size varies by each encounter function.
+Covariates can be fit to $p_0$ or $\sigma$.
+Date or time might be important, such as in hair snare studies where seasonal shedding may reduce the amount of hair available to be captured.
+A way to model this detection probability is to allow each sampling ocassion to have its own detection probability, this approach shouldn't work with live traps as an individual can only be observed at a single trap and thus detection probability is not identifiable within a single sampling ocassion, additionally this creates many more parameters to estimate and is thus slow to fit. 
+If some condition influences the detection radius, then we would expect the scale parameter to be important to fit covariates on, but if it just moves the probability of detecting an individual broadly than we would expect to fit in on $p_0$.
+A behavioral response to being trapped can be global and affect all traps or local and influence the probability of being detected at a specific trap.
 
+Local Behavioral Response - Create array $C_{ijk}$ that is an indicator variable for if individual I has been trapped in trap J before time K
+$$ logit(p_0,{ijk}) = \alpha_0 + \alpha_2 C_{ijk}$$
+$$ p_{ijk} = p_{0,ijk}exp(\alpha_1||x_j - s_j||^2) $$
+
+Individual covariates are only observable for captured individuals, so they are latent for augmented individuals. 
+Sex is commonly implemented, and could influence both the size of a home range and the degree of movement within a home range, necessitating fitting covariates on both $p_0$ and $\alpha_1$.
 
 
 ## Extension: An integrated path for spatial capture–recapture and animal movement modeling
