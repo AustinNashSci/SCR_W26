@@ -293,6 +293,20 @@ Multi-sesion models are when there are multiple studied populations, or some oth
 For single catch traps, the encounter model is a multinomial as opposed to the bernoulli encounter model. 
 SECR can provide helpful summaries of capture data such as mean-maximum distance moved, will provide automatic warnings if the state space is too small, will do model selection with AIC, will implement a population closure test, etc.
 
+## Chapter 7
+Modeling Variation in Encounter probability
+
+Common covariates to model include season, sex, capture history, type of trap, bait, etc. 
+CR models do not have trap specific covariates in encounter probability, but SCR does.
+CR models for varation in encounter probability are $M_h$ etc.
+Model $M_b$ is the CR model that accounts for whether an individual has been captured.
+SCR encounter probability models include a baseline encounter rate $\lambda_0$ and a scale parameter $\sigma$.
+Covers three types of covariates in an encounter model, fully, partially, or unobserved covariates.
+As previously discussed, there are many encounter functions, and estimates tend to be robust across them.
+However, the relationship between $\sigma$ and home range size varies by each encounter function.
+
+
+
 ## Extension: An integrated path for spatial capture–recapture and animal movement modeling
 McClintock et al. 2021 Ecology  https://doi.org/10.1002/ecy.3473
 
