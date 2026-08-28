@@ -318,6 +318,13 @@ Individual covariates are only observable for captured individuals, so they are 
 Sex is commonly implemented, and could influence both the size of a home range and the degree of movement within a home range, necessitating fitting covariates on both $p_0$ and $\alpha_1$.
 
 
+## Chapter 16 Open Population Models
+Survival and fecundity are a classic life history tradeoff that is handled in an open SCR framework.
+Population projection models similar to matrix projection models can be accomplished by predicting from the posteriors of Open SCR model outputs.
+This chapter uses CJS models with an scr model to model demographics. 
+Population dynamics are described by BIDE.
+In closed population models, CJS can model survival and JS can model survival and recruitment.
+
 ## Extension: An integrated path for spatial capture–recapture and animal movement modeling
 McClintock et al. 2021 Ecology  https://doi.org/10.1002/ecy.3473
 
