@@ -324,6 +324,37 @@ Population projection models similar to matrix projection models can be accompli
 This chapter uses CJS models with an scr model to model demographics. 
 Population dynamics are described by BIDE.
 In closed population models, CJS can model survival and JS can model survival and recruitment.
+Non spatial models ignore movement and thus BI and DE are confounded, leading to the robust design and two stage models to deconfound these processes.
+Jolly-Seber models allow you to estimate detection, abunadnce, survival, and recruitment from CR data. 
+Pollock devised a robust design version of the JS model, which is waht is generalized into a SCR framework. 
+Standard JS has no secondary periods, just primary periods, but the robust design adds secondary periods and thus allows for variation in detection probability.
+Individuals have a $Z$ state, whether they are alive or not.
+However, beacuse of data augmentation, $Z = 0$ includes dead animals and animals that have yet to be recruited to the population.
+This introduces some challenges as M needs to encompass all indivdiuals alive across the entire study period.
+Also, individuals must not re-enter the population after dying.
+An indicator variable is used to ensure that an individual that dies is not re-recruited. 
+$A(i,t) = 1$ means it is available to be recruited, thus $\phi = 0$ and it has not yet been recruited. 
+$A(i,t) = 1$ means that an individual has been recruited and is either still alive or has died.
+There is a survival parameter $\phi$ and a recruitment parameter $\gamma$ that govern the transition from state alive to dead, or state unrecruited to state recruited. 
+CJS-OSCR model is an extension of spatial multisession scr model formulation, but with individual identities.
+Data structure is MxKxT. 
+Recruitment probability is time dependent, since it is a function of the data augementation process.
+OSCR just takes a probability of detection that is a result of multiple secondary periods within a primary period and adds a spatial compenent to the detection functions.
+Here is the transition function:
+$$z(i, t + 1) ∼ Bernoulli(\phi_t z(i, t) + γt (1 − z(i, t)))$$
+If there is a declining pattern in recruitment over time then this may be a signal that the data augmentation parameter M is not set high enough.
+Additionally, if $\gamma$ is close to 1 in any time period then there is not enough augmented individuals.
+Also, checking the posterior distribution of N for truncation is critical to ensure M is high enough.
+We would expect $\phi$ to be higher in the OSCR model than in the non-spatial JS model as it is partitioning movement from from survival, thus some individuals that are undetected due to movement are removed from individuals presumed to have been killed.
+CJS models - condition on first capture of an animal, just observe survival probability of an animal after it has been marked, as opposed to JS which estimates N, B, and D.
+CJS models can be formulated as a state space model to allow for individual level covariates on survival. 
+When an individual is not observed between time periods in a CJS-SCR formulation, the prior for the home range location could be the prior periods home range location or could be a combination of the prior and future home range locations.
+Movement models can be quite complex between primary periods in a JS-SCR framework. 
+For basic markovian movement models, this may lead to activity centers moving out of the state space, reducing density. 
+This would occur for augmented individuals as there is no data cementing their activity center within the state space.
+Solutions include using a movement model with some central tendency like Ornstein Uhlenbeck or truncating a BVN kernel to the state space.
+This means that $S$ needs to be much larger than a closed scr model as an augmented individual cant be initialized on the edge of the state space and march its way into the capture grid, I think.
+"Allowing birth, growth, and survival as well as density to arise from different spatially varying processes is the next stage in development of the open SCR models."
 
 ## Extension: An integrated path for spatial capture–recapture and animal movement modeling
 McClintock et al. 2021 Ecology  https://doi.org/10.1002/ecy.3473
